@@ -25,7 +25,7 @@ public class Drawer extends JPanel implements ActionListener
     BufferedWriter fileWriter;
 
 
-    public void setWriters(boolean writerInitCondition){
+    public void setWriters(boolean writerInitCondition) {
         if (writerInitCondition) {
             try {
                 File directory = new File(Paths.get("", "output").toString());
@@ -66,17 +66,52 @@ public class Drawer extends JPanel implements ActionListener
     double[] iterXArray;
     double[] iterYArray;
     public static final int HALF_OF_CITY_SIZE = 3, HALF_OF_NODE_SIZE = 2;
-
-    public Drawer(int nodesPerCity, int maxIteration, int maxRadius, int ScreenRefreshRate
-            , double boosterForLearningRate, String fileWithCitiesPath, double learningRateMax
-            , boolean ifStartFromCitiesMassCenter, int width, int height, boolean ifWriteToConsole, boolean ifWriteToFile) {
+public boolean doneOnExiting = false;
+    public Drawer(int nodesPerCity
+            , int maxIteration
+            , int maxRadius
+            , int ScreenRefreshRate
+            , double boosterForLearningRate
+            , String fileWithCitiesPath
+            , double learningRateMax
+            , boolean ifStartFromCitiesMassCenter
+            , int width, int height
+            , boolean ifWriteToConsole
+            , boolean ifWriteToFile
+            , double circleRadius
+            , int minRadius
+            , boolean ifRandomCitiesGeneration
+            , String citiesQuantity
+            , String higherXBound
+            , String higherYBound) {
         this.ifWriteToConsole = ifWriteToConsole;
         this.ifWriteToFile = ifWriteToFile;
         setWriters(ifWriteToFile);
         MYWIDTH = width;
         MYHEIGHT = height;
-        excelFunc = new MyFunction(nodesPerCity, maxIteration, maxRadius, boosterForLearningRate
-                , fileWithCitiesPath, learningRateMax, ifStartFromCitiesMassCenter);
+        if (ifRandomCitiesGeneration) {
+            excelFunc = new MyFunction(nodesPerCity
+                    , maxIteration
+                    , maxRadius
+                    , boosterForLearningRate
+                    , learningRateMax
+                    , ifStartFromCitiesMassCenter
+                    , circleRadius
+                    , minRadius
+                    , Integer.parseInt(citiesQuantity)
+                    , Integer.parseInt(higherXBound)
+                    , Integer.parseInt(higherYBound));
+        } else {
+            excelFunc = new MyFunction(nodesPerCity
+                    , maxIteration
+                    , maxRadius
+                    , boosterForLearningRate
+                    , fileWithCitiesPath
+                    , learningRateMax
+                    , ifStartFromCitiesMassCenter
+                    , circleRadius
+                    , minRadius);
+        }
         screenRefreshFrequency = ScreenRefreshRate;
         timer = new Timer((int) (1000 / screenRefreshFrequency), this);
 
@@ -175,9 +210,10 @@ public class Drawer extends JPanel implements ActionListener
         //      timer.start();
     }
 
-    public static boolean isFinal = false;
-    public static int temporalIterationCounter = 0;
-    public static boolean finalRepaintIsDone = false;
+    public  boolean isFinal = false;
+    public  int temporalIterationCounter = 0;
+    public  boolean finalRepaintIsDone = false;
+    boolean isFinalizationNodesRingDraw = false, isFinalizationAbsolutePathDraw = false;
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -218,69 +254,89 @@ public class Drawer extends JPanel implements ActionListener
                 for (int i = 0; i < excelFunc.nodes.length; i++) {
                     transformNodeIntoDrawableParams(excelFunc.nodes[i], i);
                 }
-                FinalDialog dialog = new FinalDialog();
+                if (!doneOnExiting) {
+                    FinalDialog dialog = new FinalDialog();
 
 //final data initialization
-                Pair<Double, String> finalData = excelFunc.executeOnAlgorithmSolution();
-                timeOfEnd = System.nanoTime();
-                tmeOfExecution = timeOfEnd - timeOfStart;
+                    Pair<Double, String> finalData = excelFunc.executeOnAlgorithmSolution();
+                    timeOfEnd = System.nanoTime();
+                    tmeOfExecution = timeOfEnd - timeOfStart;
 
 
-                dialog.setTitle("RESULTS");
+                    dialog.setTitle("RESULTS");
 
-                dialog.addTextAreaToTextPanel(("Iteration " + excelFunc.currentIter + ";\n"));
-                dialog.addTextAreaToTextPanel(("Learning rate is " + excelFunc.scaleK + ";\n"));
-                dialog.addTextAreaToTextPanel(("Current nodes ring length is "
-                        + excelFunc.computeNormalizedRingLength(excelFunc.nodes) + ";\n"));
-                dialog.addTextAreaToTextPanel((" Actual radius is " + excelFunc.actualRadius + ";\n"));
+                    dialog.addTextAreaToTextPanel(("Iteration " + excelFunc.currentIter + ";\n"));
+                    dialog.addTextAreaToTextPanel(("Learning rate is " + excelFunc.scaleK + ";\n"));
+                    dialog.addTextAreaToTextPanel(("Current nodes ring length is "
+                            + excelFunc.computeNormalizedRingLength(excelFunc.nodes) + ";\n"));
+                    dialog.addTextAreaToTextPanel((" Actual radius is " + excelFunc.actualRadius + ";\n"));
 
-                dialog.addTextAreaToTextPanel(("Normalized ring length equals to "
-                        + finalData.getKey() + "\n"));
-                dialog.addTextAreaToTextPanel(("Real distance is " + finalData.getValue() + "\n"));
-
-
-                dialog.addTextAreaToTextPanel("Time of algorithm execution is " + (double) tmeOfExecution / 1000000000 + "\n");
-
-                dialog.pack();
-                dialog.setVisible(true);
-
-                if (ifWriteToConsole) {
-                    System.out.println("Iteration " + excelFunc.currentIter + "; Learning rate is " + excelFunc.scaleK
-                            + "; Current nodes ring length is " + excelFunc.computeNormalizedRingLength(excelFunc.nodes)
-                            + " ; Actual radius is " + excelFunc.actualRadius);
-                    System.out.println((("Normalized ring length equals to "
-                            + finalData.getKey() + "\n")));
-                    System.out.println(("Real distance is " + finalData.getValue() + "\n"));
+                    dialog.addTextAreaToTextPanel(("Normalized ring length equals to "
+                            + finalData.getKey() + "\n"));
+                    dialog.addTextAreaToTextPanel(("Real distance is " + finalData.getValue() + "\n"));
 
 
-                    System.out.println("Time of algorithm execution is " + (double) tmeOfExecution / 1000000000 + "\n");
+                    dialog.addTextAreaToTextPanel("Time of algorithm execution is " + (double) tmeOfExecution / 1000000000 + "\n");
 
-                }
-                if (ifWriteToFile) {
-                    try {
-                        String temp = "Iteration " + excelFunc.currentIter + "; Learning rate is " + excelFunc.scaleK
+                    dialog.pack();
+                    dialog.setVisible(true);
+
+                    if (ifWriteToConsole) {
+                        System.out.println("Iteration " + excelFunc.currentIter + "; Learning rate is " + excelFunc.scaleK
                                 + "; Current nodes ring length is " + excelFunc.computeNormalizedRingLength(excelFunc.nodes)
-                                + " ; Actual radius is " + excelFunc.actualRadius + "\r\n";
-                        fileWriter.write(temp);
-                        temp = "Normalized ring length equals to "
-                                + finalData.getKey() + "\r\n";
-                        fileWriter.write(temp);
-                        temp = "Real distance is " + finalData.getValue() + "\r\n";
-                        fileWriter.write(temp);
-                        temp = "Time of algorithm execution is " + (double) tmeOfExecution / 1000000000 + "\r\n";
-                        fileWriter.write(temp);
+                                + " ; Actual radius is " + excelFunc.actualRadius);
+                        System.out.println((("Normalized ring length equals to "
+                                + finalData.getKey() + "\n")));
+                        System.out.println(("Real distance is " + finalData.getValue() + "\n"));
 
-                        fileWriter.close();
-                    } catch (IOException ex) {
+
+                        System.out.println("Time of algorithm execution is " + (double) tmeOfExecution / 1000000000 + "\n");
+
+                    }
+                    if (ifWriteToFile) {
                         try {
-                            fileWriter.write("IOException" + "\r\n");
-                        } catch (IOException exception) {
-                            System.out.println("IOException");
+                            String temp = "Iteration " + excelFunc.currentIter + "; Learning rate is " + excelFunc.scaleK
+                                    + "; Current nodes ring length is " + excelFunc.computeNormalizedRingLength(excelFunc.nodes)
+                                    + " ; Actual radius is " + excelFunc.actualRadius + "\r\n";
+                            fileWriter.write(temp);
+                            temp = "Normalized ring length equals to "
+                                    + finalData.getKey() + "\r\n";
+                            fileWriter.write(temp);
+                            temp = "Real distance is " + finalData.getValue() + "\r\n";
+                            fileWriter.write(temp);
+                            temp = "Time of algorithm execution is " + (double) tmeOfExecution / 1000000000 + "\r\n";
+                            fileWriter.write(temp);
+
+                            fileWriter.close();
+                        } catch (IOException ex) {
+                            try {
+                                fileWriter.write("IOException" + "\r\n");
+                            } catch (IOException exception) {
+                                System.out.println("IOException");
+                            }
                         }
                     }
+                    isFinalizationAbsolutePathDraw = isFinalizationNodesRingDraw = true;
+
+                    JFrame nodFrame = new JFrame("Nodes normalizing ring finalization");
+                    NodesFinalizing nodJpanel = new NodesFinalizing(excelFunc.normalizedCities,MYWIDTH,MYHEIGHT,iterXArray,iterYArray);
+                    nodFrame.setSize(MYWIDTH+BORDER,MYHEIGHT+BORDER);
+                    nodFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    nodFrame.setResizable(false);
+
+                    JFrame cityFrame = new JFrame("Cities absolute path ring finalization");
+                    AbsoluteFinalizer cityJPanel = new AbsoluteFinalizer(excelFunc.normalizedCities,MYWIDTH,MYHEIGHT);
+                    cityFrame.setSize(MYWIDTH+BORDER,MYHEIGHT+BORDER);
+                    cityFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    cityFrame.setResizable(false);
+
+                    cityFrame.add(cityJPanel);
+                    nodFrame.add(nodJpanel);
+
+                    cityFrame.setVisible(true);
+                    nodFrame.setVisible(true);
+                    doneOnExiting = true;
                 }
-
-
             }
 
             if (temporalIterationCounter < excelFunc.normalizedCities.length - 1) {
