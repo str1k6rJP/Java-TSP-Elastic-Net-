@@ -10,6 +10,8 @@ no self-serving or trading intentions are not provided and highly disapproved
 	total iterations quantity, screen refresh rate etc.
 
   Short instrucrion
+Ver. 1.0
+
 	Nodes per city - amount of normalizing ring nodes dedicated for single point(city)
 
 	Max iterations - maximal amount of iterations

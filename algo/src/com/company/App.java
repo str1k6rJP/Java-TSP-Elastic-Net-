@@ -29,11 +29,17 @@ public class App extends JFrame{
     private JRadioButton writeToFileButton;
     private JRadioButton dontWriteToFileButton;
     private JTextField textField1;
+    private JTextField normRadiusParams;
+    private JTextField minRadius;
+    private JCheckBox generateCitiesRandomlyByCheckBox;
+    private JTextField lowerBoundTextField;
+    private JTextField citiesQuantityTextField;
+    private JTextField higherXBoundParams;
+    private JTextField higherYBoundYParams;
 
     public App() {
         add(mainPanel);
-setPreferredSize(new Dimension(950,700));
-setSize(getPreferredSize());
+
         setTitle("Plot");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 textField1.setText("\u00A9 by str1k6r(Dmytro Maliovanyi)");
@@ -65,15 +71,29 @@ setIconImage(new ImageIcon(Paths.get("","initData\\iconMenu.png").toString()).ge
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Run.ifStart = true;
+                Run.isNewAlgorithmStarted = true;
             }
         });
+
+        citiesQuantityTextField.setEditable(false);
+        higherXBoundParams.setEditable(false);
+        higherYBoundYParams.setEditable(false);
+
     }
 
     public void updateParams() {
         learRateDividerParams.setText(slider1.getValue() + "");
         maxLearnRateParams.setText((double)slider2.getValue()/10 + "");
         repaint();
+        if (generateCitiesRandomlyByCheckBox.isSelected()){
+            citiesQuantityTextField.setEditable(true);
+            higherXBoundParams.setEditable(true);
+            higherYBoundYParams.setEditable(true);
+        } else {
+            citiesQuantityTextField.setText("Cities Quantity");
+            higherXBoundParams.setText("Higher X Bound");
+            higherYBoundYParams.setText("Higher Y Bound");
+        }
     }
 
     public void setGraphDrawer(JPanel graphDrawer) {
@@ -82,6 +102,15 @@ setIconImage(new ImageIcon(Paths.get("","initData\\iconMenu.png").toString()).ge
         this.graphDrawer.revalidate();
         this.graphDrawer.repaint();
     }
+    public boolean getIfRandomCitiesGeneration(){return generateCitiesRandomlyByCheckBox.isSelected();}
+    public String getcitiesQuantityParams(){return citiesQuantityTextField.getText();}
+    public String getHigherXBoundParams(){return higherXBoundParams.getText();}
+    public String getHigherYBoundParams(){return higherYBoundYParams.getText();}
+
+    public int getMinRadius(){return Integer.parseInt(minRadius.getText());}
+
+    public  double getCircleRadius(){return  Double.parseDouble(normRadiusParams.getText());}
+
 
     public int getNodesPerCity() {
         return Integer.parseInt(nodesPerCitiesParams.getText());

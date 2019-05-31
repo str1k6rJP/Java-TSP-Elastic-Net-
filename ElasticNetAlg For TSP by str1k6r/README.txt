@@ -1,6 +1,6 @@
 This program was designed for study purposes so 
 no self-serving or trading intentions are not provided and highly disapproved
-
+Ver. 1.0.0.
   This program is designated to solve TSP problem by means of elastic net method.
 
   Short description
@@ -36,5 +36,73 @@ no self-serving or trading intentions are not provided and highly disapproved
  User wanting create their own map should use data.txt as a layout 
  Inner data format for .tsp files can be seen placing all the file's contents to Microsoft Word Document
 
-    For more detailed information of program work principles look the 'Instruction.docx' (on completion for now)
+Ver 1.0.1
+
+	-filled part of Instruction.docx
+
+Ver. 1.2.0
+
+Renamed some parameters:
+	- Max Radius -> Max Gaussian Radius
+
+Added some controlling parameters:
+
+	- Normalizing Ring Radius - defines radius of starting node's ring
+
+	- Min Gaussian Radius - the minimal number of dots following the selected one in Gaussian progression
+
+Ver 1.3.0
+
+Added (at this time nonfuntional fields:
+
+	- cities Quantity
+	- higher X Bound
+	- higher Y Bound
+
+	All the parameters listed above would be available for a random city generation function setup
+	Their field's editability is controlled by checkbox:
+		- generate cities Randomly;
+
+Ver 1.3.1
+
+Minor improvements:
+
+	-optimized spacing between fields
+
+Ver 1.3.4
+
+GUI advance:
+
+	-Form design was restructured and redesigned;
+    
+Ver 1.3.5
+
+Minor improvements:
+
+	-form sizing was fixed;
+
+Ver 1.4.0
+
+Major improvements:
+
+	-added multilaunch feature
+
+Minor improvements: fixed some bugs with setting Min Gaussian Radius and it's processing
+
+Ver 1.5.1
+
+Major improvements:
+
+	-added feature of creating two additional frames with normalizing ring and absolute cities path separately
+
+Minor improvements:
+
+	- fixed problem with non-working Normalizing Ring Parameter
+
+Ver 1.5.2
+
+Minor bugs are fixed
+
+
+For more detailed information of program work principles look the 'Instruction.docx' (on completion for now)
   	   Copyright: str1k6r(str1k6r2001@gmail.com)

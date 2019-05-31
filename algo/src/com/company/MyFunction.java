@@ -22,6 +22,8 @@ public class MyFunction {
 
     public int citiesQuantity;
     public double coefficient;
+    public double circleRadius;
+
 
     int currentIter,
             maxIter;
@@ -37,7 +39,7 @@ public class MyFunction {
     double[] normalixedXesForCities;
     double[] normalixedYsForCities;
 
-    public static double boosterForLearnRate = 1;
+    public double boosterForLearnRate = 1;
 
     //constructor
     public MyFunction() {
@@ -62,8 +64,8 @@ public class MyFunction {
         normalixedXesForCities = new double[cities.length];
         normalixedYsForCities = new double[cities.length];
 
-        this.maxRadius = maxRadius;
-        this.minRadius = minRadius;
+        this.maxRadius = 30;
+        this.minRadius = 0;
         adaptLearningParams();
 
         maxK = 0.7;
@@ -100,7 +102,7 @@ public class MyFunction {
         setCitiesFromFile(fileWithCities);
 
         nodes = new Node[(int) (citiesQuantity * coefficient)];
-        setStartPositionForNodes(0.25, new Node(0.5, 0.5));
+        setStartPositionForNodes(circleRadius, new Node(0.5, 0.5));
 
         isImmutable = new boolean[nodes.length];
         for (int i = 0; i < isImmutable.length; i++) {
@@ -133,20 +135,24 @@ public class MyFunction {
         }
     }
 
-    public MyFunction(int nodesPerCity, int maxIteration, int maxRadius, double boosterForLearningRate, String fileWithCitiesPath, double maxScale, boolean ifStartFromMassCenter) {
+    public MyFunction(int nodesPerCity, int maxIteration, int maxRadius
+            , double boosterForLearningRate, String fileWithCitiesPath, double maxScale, boolean ifStartFromMassCenter
+            , double circleRadius, int minRadius) {
 
         maxK = maxScale;
         minK = 0.001;
         scaleK = maxK;
         coefficient = nodesPerCity;
 
+        this.circleRadius = circleRadius;
+
         maxIter = maxIteration;
         currentIter = 1;
 
         boosterForLearnRate = boosterForLearningRate;
         this.maxRadius = maxRadius;
-        minRadius = 1;
         actualRadius = maxRadius;
+        this.minRadius = minRadius;
         adaptLearningParams();
 
 
@@ -164,9 +170,63 @@ public class MyFunction {
 
         nodes = new Node[(int) (citiesQuantity * coefficient)];
         if (ifStartFromMassCenter) {
-            setStartPositionForNodes(0.25, getCitiesMassCenter());
+            setStartPositionForNodes(this.circleRadius, getCitiesMassCenter());
         } else {
-            setStartPositionForNodes(0.25, new Node(0.5, 0.5));
+            setStartPositionForNodes(this.circleRadius, new Node(0.5, 0.5));
+        }
+
+        isImmutable = new boolean[nodes.length];
+        for (int i = 0; i < isImmutable.length; i++) {
+            isImmutable[i] = false;
+        }
+    }
+
+    public MyFunction(int nodesPerCity
+            , int maxIteration
+            , int maxRadius
+            , double boosterForLearningRate
+            , double maxScale
+            , boolean ifStartFromMassCenter
+            , double circleRadius
+            , int minRadius
+            , int citiesQuantity
+            , int higherXBound
+            , int higherYBound) {
+
+        maxK = maxScale;
+        minK = 0.001;
+        scaleK = maxK;
+        coefficient = nodesPerCity;
+
+        this.circleRadius = circleRadius;
+        this.minRadius = minRadius;
+        maxIter = maxIteration;
+        currentIter = 1;
+
+        boosterForLearnRate = boosterForLearningRate;
+        this.maxRadius = maxRadius;
+        actualRadius = maxRadius;
+        adaptLearningParams();
+
+
+        this.citiesQuantity = citiesQuantity;
+        setCitiesFromFile(CitiesGenerator.getFileWithNodes(citiesQuantity, higherXBound, higherYBound).toPath().toString());
+
+        setMinsAndMaxs(cities);
+        setrangesXAndY();
+
+        setNormalixedXesAndYsForCities();
+
+        normalizedCities = new City[citiesQuantity];
+        for (int i = 0; i < normalizedCities.length; i++) {
+            normalizedCities[i] = new City(normalixedXesForCities[i], normalixedYsForCities[i]);
+        }
+
+        nodes = new Node[(int) (citiesQuantity * coefficient)];
+        if (ifStartFromMassCenter) {
+            setStartPositionForNodes(this.circleRadius, getCitiesMassCenter());
+        } else {
+            setStartPositionForNodes(this.circleRadius, new Node(0.5, 0.5));
         }
 
         isImmutable = new boolean[nodes.length];
@@ -254,18 +314,18 @@ public class MyFunction {
         }
 
 
-       // String[] nameParts = file.getName().split("\\\\");
+        // String[] nameParts = file.getName().split("\\\\");
         String[] nameParts = temporal.get(0).split("\\s+");
-        char[] fileNameWithoutExtension = nameParts[nameParts.length-1].split("\\.")[0].toCharArray();
+        char[] fileNameWithoutExtension = nameParts[nameParts.length - 1].split("\\.")[0].toCharArray();
         String number = new String();
-        for (int i = 0; i<fileNameWithoutExtension.length;i++) {
-            if ((fileNameWithoutExtension[i]>=48)&&(fileNameWithoutExtension[i]<=57)){
-                number+=fileNameWithoutExtension[i];
+        for (int i = 0; i < fileNameWithoutExtension.length; i++) {
+            if ((fileNameWithoutExtension[i] >= 48) && (fileNameWithoutExtension[i] <= 57)) {
+                number += fileNameWithoutExtension[i];
             }
         }
 
 
-        int amount = temporal.size()-((Integer.parseInt(number)));
+        int amount = temporal.size() - ((Integer.parseInt(number)));
 
 
         citiesQuantity = Integer.parseInt(number);
@@ -337,8 +397,9 @@ public class MyFunction {
         if (Double.isFinite(exponentFunc)) {
             scaleK = maxK * exponentFunc;
         }
-        double fraction = (double) minRadius / (double) maxRadius;
-        double log = Math.log(fraction);
+double num = minRadius <= 0 ? 1:minRadius;
+        double fraction =  num / (double) maxRadius;
+        double log =Math.log(fraction);
         double exp = Math.exp(((double) currentIter / (double) maxIter) * log);
         int tmp = (int) (maxRadius * exp);
 //        if (tmp<actualRadius){
@@ -481,15 +542,15 @@ public class MyFunction {
         return ringLength;
     }
 
-    public Pair<Double,String> executeOnAlgorithmSolution() {
-       String s =  calculateRealDistance();
+    public Pair<Double, String> executeOnAlgorithmSolution() {
+        String s = calculateRealDistance();
 
         sortCitiesByWinnerNode(normalizedCities);
-double normalizedLength = computeNormalizedRingLength(nodes);
+        double normalizedLength = computeNormalizedRingLength(nodes);
         System.out.println("Nodes ring length is  " + normalizedLength);
         double solutionPath = getCurrentSolutionPathLength(normalizedCities);
         System.out.println(solutionPath);
-return new Pair<>(solutionPath,s);
+        return new Pair<>(solutionPath, s);
     }
 
     public String calculateRealDistance() {
