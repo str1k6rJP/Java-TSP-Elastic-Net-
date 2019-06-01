@@ -11,6 +11,9 @@ This algorithm gives quazioptimal solutions(what means they are good, but probab
 Since that reason I'd recommend you to run it a few times on single input data so you would get really good solutions.
 
 The 'algor' folder is outdated so there is no reason to use it.
-All the useful data kies in folder with README.txt
+
+All the useful data lies in folder with README.txt
+
 The optimized code is inside 'Algorithm' folder
+
 The 'algo' folder still stays here because of only the reason I don't know how to delete all the folder together and it doesn't seem possible to do it manually deleting it file by file
