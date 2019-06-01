@@ -35,10 +35,12 @@ Ver. 1.0.0.
  You should know that even not any .tsp file could run. It's because some of them were made in incomprehensible for this program author way so make sure data is stored in way any of example data stored
  User wanting create their own map should use data.txt as a layout 
  Inner data format for .tsp files can be seen placing all the file's contents to Microsoft Word Document
+-----------------------------------------------------------------------------
 
 Ver 1.0.1
 
 	-filled part of Instruction.docx
+-----------------------------------------------------------------------------
 
 Ver. 1.2.0
 
@@ -50,6 +52,7 @@ Added some controlling parameters:
 	- Normalizing Ring Radius - defines radius of starting node's ring
 
 	- Min Gaussian Radius - the minimal number of dots following the selected one in Gaussian progression
+-----------------------------------------------------------------------------
 
 Ver 1.3.0
 
@@ -62,24 +65,28 @@ Added (at this time nonfuntional fields:
 	All the parameters listed above would be available for a random city generation function setup
 	Their field's editability is controlled by checkbox:
 		- generate cities Randomly;
+-----------------------------------------------------------------------------
 
 Ver 1.3.1
 
 Minor improvements:
 
 	-optimized spacing between fields
+-----------------------------------------------------------------------------
 
 Ver 1.3.4
 
 GUI advance:
 
 	-Form design was restructured and redesigned;
+-----------------------------------------------------------------------------
     
 Ver 1.3.5
 
 Minor improvements:
 
 	-form sizing was fixed;
+-----------------------------------------------------------------------------
 
 Ver 1.4.0
 
@@ -87,7 +94,10 @@ Major improvements:
 
 	-added multilaunch feature
 
-Minor improvements: fixed some bugs with setting Min Gaussian Radius and it's processing
+Minor improvements:
+
+	-fixed some bugs with setting Min Gaussian Radius and it's processing
+-----------------------------------------------------------------------------
 
 Ver 1.5.1
 
@@ -98,10 +108,102 @@ Major improvements:
 Minor improvements:
 
 	- fixed problem with non-working Normalizing Ring Parameter
+-----------------------------------------------------------------------------
 
 Ver 1.5.2
 
-Minor bugs are fixed
+	Minor bugs are fixed
+-----------------------------------------------------------------------------
+
+Ver 1.5.3
+
+Major improvements:
+
+	-bug with program freeze while deselecting checkbox 'generate Cities Randomly'
+	
+	-bug with problem freeze when parameters are started to set up from random generator parameters 
+
+Minor improvements:
+
+	-GUI code optimized
+
+	-revalidating problem solved 
+-----------------------------------------------------------------------------
+
+Ver 1.6.0
+
+New feature added:
+
+	-setting up random cities by means of random city generator have been added
+-----------------------------------------------------------------------------
+
+Ver 1.6.2
+
+Minor improvements:
+
+	-bug when random city generator was not finding proper generated place was fixed
+-----------------------------------------------------------------------------
+
+Ver 1.6.3
+
+New feature added:
+
+	-now file generator writes it's files to 'generatedSources' folder
+-----------------------------------------------------------------------------
+
+Ver 1.6.4
+
+Minor improvements:
+
+	-bug with black frame instead of absolute pathway was fixed
+-----------------------------------------------------------------------------
+
+Ver 1.6.5
+
+	'Інструкція.docx' file containing 'Instruction.docx''s contents translated into ukrainian was added
+-----------------------------------------------------------------------------
+
+Ver 1.6.6
+
+	'Інструкція.docx' was greatly extended
+-----------------------------------------------------------------------------
+
+Ver 1.6.8
+
+Minor improvements:
+
+	- icons for both absolute path plot window and nodes path plot window were added
+-----------------------------------------------------------------------------
+
+Ver 1.6.9
+
+Minor improvements:
+
+	-minor bugs were fixed
+
+	-some function and GUI code was optimized
+-----------------------------------------------------------------------------
+
+Ver 1.6.10
+
+	All the program specification and working principles were described in 'Інструкція.docx'
+-----------------------------------------------------------------------------
+
+Ver 1.6.11
+
+	New add-on: -the example of work session on one generated set of points was added.
+			In this example all the functionality reliable work was demonstrated.
+
+		    -for better comprehensibility screenshots were added and conclusion was formed
+-----------------------------------------------------------------------------
+
+Ver 1.6.12
+
+	Hyperlinks on local files of input and output of the session were added 
+
+
+
+
 
 
 For more detailed information of program work principles look the 'Instruction.docx' (on completion for now)

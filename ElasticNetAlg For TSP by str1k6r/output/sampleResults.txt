@@ -1,0 +1,59 @@
+Iteration 500; Learning rate is 0.09364066760274001; Current nodes ring length is 2.807522360412457 ; Actual radius is 1
+Normalized ring length equals to 2.9278472204329633
+Real distance is Real distance is : 37.01808839323936
+Time of algorithm execution is 49.343577558
+
+Iteration 166; Learning rate is 0.42586880926089166; Current nodes ring length is 3.1586253369735324 ; Actual radius is 2
+Normalized ring length equals to 3.1608041927357458
+Real distance is Real distance is : 209.4167112118153
+Time of algorithm execution is 18.677792417
+
+Iteration 192; Learning rate is 0.37850268379537405; Current nodes ring length is 3.0893520124938028 ; Actual radius is 2
+Normalized ring length equals to 3.0894393149706536
+Real distance is Real distance is : 208.67534308918607
+Time of algorithm execution is 19.440906828
+
+Iteration 500; Learning rate is 0.09364066760274001; Current nodes ring length is 3.4188960323305566 ; Actual radius is 1
+Normalized ring length equals to 3.654496572118664
+Real distance is Real distance is : 188.9801785991852
+Time of algorithm execution is 49.534882641
+
+Iteration 500; Learning rate is 0.09364066760274001; Current nodes ring length is 3.418873143535155 ; Actual radius is 1
+Normalized ring length equals to 3.654496572118664
+Real distance is Real distance is : 188.9801785991852
+Time of algorithm execution is 49.640077338
+
+Iteration 305; Learning rate is 0.3200351262494327; Current nodes ring length is 3.4397224156101456 ; Actual radius is 1
+Normalized ring length equals to 3.44161514757077
+Real distance is Real distance is : 181.43446179662442
+Time of algorithm execution is 33.568957012
+
+Iteration 226; Learning rate is 0.1947771221551916; Current nodes ring length is 3.440749013160362 ; Actual radius is 2
+Normalized ring length equals to 3.44161514757077
+Real distance is Real distance is : 181.43446179662442
+Time of algorithm execution is 22.520071762
+
+Iteration 264; Learning rate is 0.15041000630261456; Current nodes ring length is 3.440864001811425 ; Actual radius is 1
+Normalized ring length equals to 3.44161514757077
+Real distance is Real distance is : 181.43446179662442
+Time of algorithm execution is 27.129340277
+
+Iteration 43; Learning rate is 0.6763388333707208; Current nodes ring length is 3.4391707857287885 ; Actual radius is 2
+Normalized ring length equals to 3.4416151475707704
+Real distance is Real distance is : 181.43446179662442
+Time of algorithm execution is 4.091490254
+
+Iteration 500; Learning rate is 0.030204767508019145; Current nodes ring length is 3.4199327016447816 ; Actual radius is 1
+Normalized ring length equals to 3.654496572118664
+Real distance is Real distance is : 188.9801785991852
+Time of algorithm execution is 46.613069925
+
+Iteration 51; Learning rate is 0.6405165916124389; Current nodes ring length is 3.440401900354682 ; Actual radius is 2
+Normalized ring length equals to 3.4416151475707704
+Real distance is Real distance is : 181.43446179662442
+Time of algorithm execution is 4.528819089
+
+Iteration 500; Learning rate is 0.030204767508019145; Current nodes ring length is 3.4238331871106844 ; Actual radius is 1
+Normalized ring length equals to 3.654496572118664
+Real distance is Real distance is : 188.9801785991852
+Time of algorithm execution is 54.062076793
