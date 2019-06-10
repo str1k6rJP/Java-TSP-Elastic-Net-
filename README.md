@@ -16,4 +16,3 @@ All the useful data lies in folder with README.txt
 
 The optimized code is inside 'Algorithm' folder
 
-The 'algo' folder still stays here because of only the reason I don't know how to delete all the folder together and it doesn't seem possible to do it manually deleting it file by file
