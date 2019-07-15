@@ -1,0 +1,32 @@
+Iteration 9; Learning rate is 0.9638290236239705; Current nodes ring length is 3.6197538657009156 ; Actual radius is 1
+Normalized ring length equals to 3.4780288257880856
+Real distance is Real distance is : 19.30056307974577
+Time of algorithm execution is 9.339957008
+Iteration 18; Learning rate is 0.9246981739382226; Current nodes ring length is 3.6199147807161016 ; Actual radius is 1
+Normalized ring length equals to 3.4780288257880856
+Real distance is Real distance is : 19.30056307974577
+Time of algorithm execution is 18.488344083
+Iteration 9; Learning rate is 0.9638290236239705; Current nodes ring length is 3.617844111610798 ; Actual radius is 1
+Normalized ring length equals to 3.4780288257880856
+Real distance is Real distance is : 19.30056307974577
+Time of algorithm execution is 9.372830876
+Iteration 300; Learning rate is 0.25234807724805747; Current nodes ring length is 3.4312840951680506 ; Actual radius is 1
+Normalized ring length equals to 3.4780288257880856
+Real distance is Real distance is : 19.30056307974577
+Time of algorithm execution is 308.611546337
+Iteration 10; Learning rate is 0.9594006315159331; Current nodes ring length is 3.42624837167023 ; Actual radius is 8
+Normalized ring length equals to 3.673292862359042
+Real distance is Real distance is : 20.990716082598492
+Time of algorithm execution is 10.443754105
+Iteration 10; Learning rate is 0.9594006315159331; Current nodes ring length is 3.6194958996905626 ; Actual radius is 1
+Normalized ring length equals to 3.4780288257880856
+Real distance is Real distance is : 19.30056307974577
+Time of algorithm execution is 1.360161195
+Iteration 9; Learning rate is 0.9638290236239705; Current nodes ring length is 3.6623002187896 ; Actual radius is 1
+Normalized ring length equals to 3.4780288257880856
+Real distance is Real distance is : 19.30056307974577
+Time of algorithm execution is 1.208217403
+Iteration 22; Learning rate is 0.9078205301781858; Current nodes ring length is 3.663119108642424 ; Actual radius is 1
+Normalized ring length equals to 3.4780288257880856
+Real distance is Real distance is : 19.30056307974577
+Time of algorithm execution is 2.66675551
