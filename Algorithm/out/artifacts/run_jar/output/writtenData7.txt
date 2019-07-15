@@ -1,0 +1,4 @@
+Iteration 2000; Learning rate is 0.15054986710794188; Current nodes ring length is 3.6233878357980047 ; Actual radius is 1
+Normalized ring length equals to 3.6233878357979608
+Real distance is 152.0582778000321
+Time of algorithm execution is 220.833744037
