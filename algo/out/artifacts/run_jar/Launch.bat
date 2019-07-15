@@ -1,1 +1,0 @@
-java -jar untitled4.jar data.txt
